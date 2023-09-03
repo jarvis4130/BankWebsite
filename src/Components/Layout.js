@@ -10,7 +10,10 @@ const Layout = ({children}) => {
             <Link className='text-link' to="/">Account Login</Link>
           </li>
           <li>
-            <Link className='text-link' to="/TransactionDetails">Transaction Details</Link>
+            <Link className='text-link' to="/ShowUserDetails">Account Details/ Pin</Link>
+          </li>
+          <li>
+            <Link className='text-link' to="/OnlinePayment">Online Payment</Link>
           </li>
           <li>
             <Link className='text-link' to="/Loan">Loan</Link>

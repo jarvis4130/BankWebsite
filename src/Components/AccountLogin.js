@@ -1,23 +1,8 @@
 import React from 'react'
 import { useState } from 'react';
 
-const AccountLogin = ({ verifyEmail }) => {
+const AccountLogin = ({ signIn,signUp }) => {
 
-  const [data, setdata] = useState([
-    {
-      id: 1,
-      name: 'Atharva Adam',
-      email: 'atharvaadam@gmail.com',
-      password: 'Atharva',
-    },
-    {
-      id: 2,
-      name: 'Kendall Roy',
-      email: 'kendallroy@gmail.com',
-      password: 'Kendall',
-    }
-  ]
-  )
 
   const [authMode, setAuthMode] = useState('Sign In')
 
@@ -25,56 +10,23 @@ const AccountLogin = ({ verifyEmail }) => {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleVerifyEmail = (e) => {
-
-    e.preventDefault()    
-    // not taking null values
-    if(name==='' || email==='' || password===''){
-      alert('Please fill all details')
-    }
-    const res = data.filter((user) => (user.email === email && user.password === password))
-
-    const sameEmail=data.filter((user)=>(user.email===email ))
-    
-    // check already user exist or not
-    if(res.length===1){
-      alert('User already exist try Signing In')
-    }
-
-    // email already exist
-    else if(sameEmail.length===1){
-      alert('Please enter another Email, Email already taken')
-    }
-
-    else {
-      const newdata = { id: 3, name: name, email: email, password: password }
-
-      setdata([...data, newdata])
-      console.log(newdata)
-      setName('');
-      setEmail('');
-      setPassword('');
-    }
-
-  }
-
-  const handleLoginEmail = (e) => {
-
+  const handleSignEmail=(e)=>{
     e.preventDefault()
-    const res = data.filter((user) => (user.email === email && user.password === password))
 
-    console.log("res:", res);
-    console.log("res length:", res.length);
-
-    if (res.length >= 1) {
-      console.log(res)
-    }
-
-    setName('');
-    setEmail('');
-    setPassword('');
-
+    signIn({email,password})
+    setEmail('')
+    setPassword('')
   }
+
+  const handleLoginEmail=(e)=>{
+    e.preventDefault()
+
+    signUp({name,email,password})
+    setName('')
+    setEmail('')
+    setPassword('')
+  }
+  
 
   const changeAuthMode = () => {
     setAuthMode(authMode === 'Sign In' ? 'Sign Up' : 'Sign In');
@@ -110,7 +62,7 @@ const AccountLogin = ({ verifyEmail }) => {
           </p>
 
           <p>
-            <input type="submit" value="Submit" onClick={authMode === 'Sign Up' ? handleVerifyEmail : handleLoginEmail} />
+            <input type="submit" value="Submit" onClick={authMode === 'Sign Up' ? handleLoginEmail : handleSignEmail} />
           </p>
         </form>
 
